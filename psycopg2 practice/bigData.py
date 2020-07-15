@@ -6,10 +6,11 @@ import os
 Here I will practice importing a CSV file in chunks instead all at once to avoid MemoryError when working with truly big files. 
 The logic follows this process:
 
-    1. Import chunk
-    2. Parse data
-    3. Insert to PostgreSQL table 
-    4. Continue on to the next chunk
+    1. Partition large csv into smaller CSV's
+    2. Parse data for the first chunk
+    3. Insert chunk to PostgreSQL table 
+    4. Continue on to the second chunk
+    ...
 '''
         
 lst = []
@@ -32,6 +33,7 @@ def parse(chunk):
     df['money'] = df['money'].apply(lambda x: x.replace('$',''))
     df['date_of_birth'] = df['date_of_birth'].apply(lambda x: x.replace('/','-'))
     #return dfParsed
+    pass
 
 def writeSQL(chunk):
     pass 
