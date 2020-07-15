@@ -1,5 +1,6 @@
 import psycopg2
 import pandas as pd 
+import os
 
 '''
 Here I will practice importing a CSV file in chunks instead all at once to avoid MemoryError when working with truly big files. 
@@ -13,12 +14,18 @@ The logic follows this process:
         
 lst = []
 
-def partition(chunksize = 10**2):    
-    csvFile = pd.read_csv('../resources/MOCK_DATA.csv', chunksize=chunksize)
+def partition(file_path='../resources/MOCK_DATA.csv' , chunk_size = 500):    
+    '''
+    parameter: chunk_size
+    breaks down csv file into smaller csv files by chunk size
+    '''
+    batch_num = 1
+    csvFile = pd.read_csv(file_path, chunksize=chunk_size)
+
     for chunk in csvFile:
-        df = chunk
-        lst.append(df)
-        return lst
+        newFile = os.path.splitext('../resources/MOCK_DATA.csv')[0]
+        chunk.to_csv(newFile + str(batch_num) + '.csv', index=False)
+        batch_num+=1
 
 
 def parse(chunk):
