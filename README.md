@@ -1,2 +1,3 @@
 # PostgreSQL
-Interfacing between Python and PostgreSQL
+
+Working with Python & SQL
