@@ -4,7 +4,7 @@ import numpy as np
 from datetime import datetime
 
 
-
+# start connection
 conn = psycopg2.connect(
     host = 'localhost',
     database = 'postgres',
@@ -12,7 +12,7 @@ conn = psycopg2.connect(
     password = 'postgres'
 )
 
-
+# read csv
 movies = pd.read_csv('http://bit.ly/imdbratings')
 
 
@@ -86,9 +86,3 @@ def select(con= conn, limit= '10'):
         results.append(r)
     
     return results
-
-
-# practice reading in csv with millions of rows
-
-
-# practice deleting duplicates
